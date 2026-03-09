@@ -62,7 +62,7 @@ const Instructions = () => {
               className="bg-card/80 backdrop-blur-sm rounded-2xl p-4 border border-border/50 flex items-center gap-4 animate-fade-up"
               style={{ animationDelay: `${0.25 + i * 0.08}s` }}
             >
-              <span className="text-3xl">{app.icon}</span>
+              <img src={app.icon} alt={app.name} className="w-10 h-10 rounded-xl object-contain" />
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-foreground">{app.name}</p>
                 <p className="text-xs text-muted-foreground truncate">

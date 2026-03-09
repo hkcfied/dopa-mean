@@ -55,7 +55,7 @@ const Index = () => {
             </div>
             <div className="flex gap-3 items-start">
               <span className="bg-primary/15 text-primary rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
-              <span>Each tap triggers a 10-second mindful pause</span>
+              <span>Each tap triggers a 30-second mindful pause</span>
             </div>
           </div>
         </div>
@@ -117,9 +117,11 @@ const AppTile = ({
         ✓
       </div>
     )}
-    <span className="text-3xl" role="img" aria-label={app.name}>
-      {app.icon}
-    </span>
+    <img
+      src={app.icon}
+      alt={app.name}
+      className="w-12 h-12 rounded-xl object-contain"
+    />
     <span className="text-xs font-medium text-foreground">{app.name}</span>
   </button>
 );
