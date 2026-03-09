@@ -22,50 +22,69 @@ const Instructions = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-warm flex flex-col">
-      <div className="flex-1 flex flex-col px-6 py-8 max-w-lg mx-auto w-full">
+    <div className="min-h-screen gradient-earth grain-overlay">
+      <div className="flex flex-col px-6 py-10 max-w-md mx-auto w-full">
         {/* Header */}
-        <div className="mb-8 animate-fade-up">
-          <Link to="/" className="text-primary text-sm font-medium mb-4 inline-block">
-            ← Back
+        <div className="mb-10 opacity-0 animate-fade-up">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-primary text-sm font-body font-medium mb-6 hover:opacity-70 transition-opacity"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Back
           </Link>
-          <h1 className="text-3xl font-display font-bold text-foreground mb-2">
-            Set up your shortcuts
+          <h1 className="text-3xl font-display font-bold text-foreground mb-2 tracking-tight">
+            Set up your <span className="italic text-primary">shortcuts</span>
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm font-light">
             Follow these steps for each app below.
           </p>
         </div>
 
-        {/* Steps */}
+        {/* Steps — editorial numbered list */}
         <div
-          className="bg-card/60 backdrop-blur-sm rounded-2xl p-5 mb-8 border border-border/50 animate-fade-up"
-          style={{ animationDelay: "0.15s" }}
+          className="mb-10 opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.1s" }}
         >
-          <h2 className="font-display font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">
-            For each app
-          </h2>
-          <div className="space-y-4 text-sm">
-            <Step n={1} text='Open the link below in Safari, tap the Share button (box with arrow)' />
-            <Step n={2} text='Scroll down and tap "Add to Home Screen"' />
-            <Step n={3} text="Keep the app name as-is and tap Add" />
-            <Step n={4} text="Move the real app into a hidden folder or delete it" />
-            <Step n={5} text="The shortcut now looks identical — but adds a mindful pause ✨" />
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-[10px] font-body font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              Instructions
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+          <div className="space-y-4">
+            {[
+              'Open the link below in Safari, tap the Share button',
+              'Scroll down and tap "Add to Home Screen"',
+              'Keep the app name as-is and tap Add',
+              'Move the real app into a hidden folder or delete it',
+              'The shortcut now intercepts with a mindful pause',
+            ].map((text, i) => (
+              <div key={i} className="flex gap-4 items-baseline">
+                <span className="text-lg font-display font-bold text-primary/35 tabular-nums shrink-0 w-6 text-right">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-sm text-muted-foreground leading-relaxed">{text}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* App Cards */}
-        <div className="space-y-3 mb-8">
+        <div className="space-y-2.5 mb-10">
           {selectedApps.map((app, i) => (
             <div
               key={app.id}
-              className="bg-card/80 backdrop-blur-sm rounded-2xl p-4 border border-border/50 flex items-center gap-4 animate-fade-up"
-              style={{ animationDelay: `${0.25 + i * 0.08}s` }}
+              className="bg-card/70 backdrop-blur-sm rounded-xl p-4 border border-border/50 flex items-center gap-4 opacity-0 animate-fade-up"
+              style={{ animationDelay: `${0.2 + i * 0.06}s` }}
             >
-              <img src={app.icon} alt={app.name} className="w-10 h-10 rounded-xl object-contain" />
+              <img src={app.icon} alt={app.name} className="w-10 h-10 rounded-lg object-contain" />
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-foreground">{app.name}</p>
-                <p className="text-xs text-muted-foreground truncate">
+                <p className="font-body font-semibold text-foreground text-sm">{app.name}</p>
+                <p className="text-[11px] text-muted-foreground/70 truncate font-mono">
                   {getInterceptionUrl(app.id)}
                 </p>
               </div>
@@ -75,7 +94,11 @@ const Instructions = () => {
                 rel="noopener noreferrer"
                 className="shrink-0"
               >
-                <Button size="sm" variant="outline" className="rounded-xl text-xs">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="rounded-lg text-xs h-8 px-3 border-border/60 hover:bg-primary/5 hover:border-primary/30 transition-colors"
+                >
                   Open
                 </Button>
               </a>
@@ -85,19 +108,25 @@ const Instructions = () => {
 
         {/* Tip */}
         <div
-          className="bg-primary/10 rounded-2xl p-4 text-sm text-foreground/80 animate-fade-up"
-          style={{ animationDelay: "0.5s" }}
+          className="rounded-xl p-4 text-sm text-foreground/70 border border-primary/15 bg-primary/5 opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.45s" }}
         >
-          <span className="font-semibold">💡 Tip:</span> Open each link in Safari, then use
-          "Add to Home Screen" so it looks and behaves like the real app.
+          <span className="font-body font-semibold text-primary">Tip — </span>
+          Open each link in Safari, then use "Add to Home Screen" so it looks and behaves like the real app.
         </div>
 
         {/* Test */}
-        <div className="mt-8 text-center animate-fade-up" style={{ animationDelay: "0.6s" }}>
-          <p className="text-xs text-muted-foreground mb-2">Want to see how it feels?</p>
+        <div
+          className="mt-8 text-center opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.55s" }}
+        >
+          <p className="text-xs text-muted-foreground/60 mb-2">Want to see how it feels?</p>
           {selectedApps.length > 0 && (
             <Link to={`/intercept?app=${selectedApps[0].id}`}>
-              <Button variant="ghost" className="text-primary font-semibold">
+              <Button
+                variant="ghost"
+                className="text-primary font-body font-semibold text-sm hover:bg-primary/5"
+              >
                 Preview the interception →
               </Button>
             </Link>
@@ -107,14 +136,5 @@ const Instructions = () => {
     </div>
   );
 };
-
-const Step = ({ n, text }: { n: number; text: string }) => (
-  <div className="flex gap-3 items-start">
-    <span className="bg-primary/15 text-primary rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-      {n}
-    </span>
-    <span className="text-muted-foreground">{text}</span>
-  </div>
-);
 
 export default Instructions;

@@ -23,49 +23,85 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-warm flex flex-col">
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 max-w-lg mx-auto w-full">
+    <div className="min-h-screen gradient-earth grain-overlay">
+      <div className="flex flex-col items-center px-6 py-16 max-w-md mx-auto w-full min-h-screen">
+        {/* Decorative leaf */}
+        <div
+          className="opacity-0 animate-fade-up mb-2"
+          style={{ animationDelay: "0s" }}
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-primary">
+            <path
+              d="M12 2C6.5 2 2 6.5 2 12c0 3.5 1.8 6.6 4.5 8.4C7.8 17.2 9.7 14 12 12c2.3 2 4.2 5.2 5.5 8.4C20.2 18.6 22 15.5 22 12c0-5.5-4.5-10-10-10z"
+              fill="currentColor"
+              opacity="0.15"
+            />
+            <path
+              d="M12 2c0 5 2 8 5 10-3 0-5 2-5 5-0-3-2-5-5-5 3-2 5-5 5-10z"
+              fill="currentColor"
+              opacity="0.6"
+            />
+          </svg>
+        </div>
+
         {/* Hero */}
-        <div className="text-center mb-10 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-          <div className="text-5xl mb-4">🌿</div>
-          <h1 className="text-4xl font-display font-bold text-foreground mb-3 tracking-tight">
-            Take back your time
+        <div
+          className="text-center mb-12 opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.08s" }}
+        >
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-4 tracking-tight leading-[1.1] text-balance">
+            Take back
+            <br />
+            <span className="italic text-primary">your time</span>
           </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            Replace your social media apps with mindful shortcuts that give your brain a moment to decide.
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xs mx-auto font-light">
+            Replace social media with mindful shortcuts that give your brain a moment to decide.
           </p>
         </div>
 
-        {/* How it works */}
+        {/* How it works — editorial style */}
         <div
-          className="w-full bg-card/60 backdrop-blur-sm rounded-2xl p-5 mb-8 border border-border/50 animate-fade-up"
-          style={{ animationDelay: "0.2s" }}
+          className="w-full mb-12 opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.16s" }}
         >
-          <h2 className="font-display font-semibold text-foreground mb-3 text-sm uppercase tracking-wider">
-            How it works
-          </h2>
-          <div className="space-y-2.5 text-sm text-muted-foreground">
-            <div className="flex gap-3 items-start">
-              <span className="bg-primary/15 text-primary rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
-              <span>Choose the apps you want to intercept</span>
-            </div>
-            <div className="flex gap-3 items-start">
-              <span className="bg-primary/15 text-primary rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
-              <span>Add shortcuts to your home screen</span>
-            </div>
-            <div className="flex gap-3 items-start">
-              <span className="bg-primary/15 text-primary rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
-              <span>Each tap triggers a 30-second mindful pause</span>
-            </div>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-[10px] font-body font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              How it works
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            {[
+              { n: "01", text: "Choose the apps to intercept" },
+              { n: "02", text: "Add shortcuts to your home screen" },
+              { n: "03", text: "Each tap triggers a 30s mindful pause" },
+            ].map((step) => (
+              <div key={step.n} className="space-y-2">
+                <span className="text-2xl font-display font-bold text-primary/40">
+                  {step.n}
+                </span>
+                <p className="text-xs text-muted-foreground leading-snug">
+                  {step.text}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* App Grid */}
-        <div className="w-full mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-          <h2 className="font-display font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">
-            Choose your apps
-          </h2>
-          <div className="grid grid-cols-3 gap-3">
+        <div
+          className="w-full mb-10 opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.24s" }}
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-[10px] font-body font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              Select apps
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+          <div className="grid grid-cols-3 gap-2.5">
             {socialApps.map((app) => (
               <AppTile
                 key={app.id}
@@ -78,15 +114,20 @@ const Index = () => {
         </div>
 
         {/* CTA */}
-        <div className="w-full animate-fade-up" style={{ animationDelay: "0.4s" }}>
+        <div
+          className="w-full mt-auto opacity-0 animate-fade-up"
+          style={{ animationDelay: "0.32s" }}
+        >
           <Button
             onClick={handleGenerate}
             disabled={selected.size === 0}
-            className="w-full h-14 text-lg font-display font-bold rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] disabled:opacity-40 disabled:scale-100"
+            className="w-full h-14 text-base font-body font-semibold rounded-xl shadow-sm transition-all duration-300 hover:shadow-md hover:brightness-110 disabled:opacity-30 disabled:shadow-none bg-primary text-primary-foreground"
           >
-            Generate My Shortcuts ({selected.size})
+            {selected.size === 0
+              ? "Select apps to continue"
+              : `Generate ${selected.size} shortcut${selected.size > 1 ? "s" : ""}`}
           </Button>
-          <p className="text-center text-xs text-muted-foreground mt-3">
+          <p className="text-center text-[11px] text-muted-foreground/70 mt-4 tracking-wide">
             No account needed · Works entirely on your device
           </p>
         </div>
@@ -106,23 +147,29 @@ const AppTile = ({
 }) => (
   <button
     onClick={onToggle}
-    className={`relative flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-200 ${
+    className={`group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-250 ${
       isSelected
-        ? "border-primary bg-primary/10 shadow-md scale-[1.03]"
-        : "border-border/50 bg-card/60 hover:border-primary/30 hover:bg-card"
+        ? "border-primary/50 bg-primary/8 shadow-sm ring-1 ring-primary/20"
+        : "border-border/60 bg-card/50 hover:border-primary/25 hover:bg-card/80"
     }`}
   >
     {isSelected && (
-      <div className="absolute -top-1.5 -right-1.5 bg-primary text-primary-foreground w-5 h-5 rounded-full flex items-center justify-center text-xs">
-        ✓
+      <div className="absolute -top-1.5 -right-1.5 bg-primary text-primary-foreground w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
     )}
-    <img
-      src={app.icon}
-      alt={app.name}
-      className="w-12 h-12 rounded-xl object-contain"
-    />
-    <span className="text-xs font-medium text-foreground">{app.name}</span>
+    <div className={`transition-transform duration-200 ${isSelected ? "scale-105" : "group-hover:scale-105"}`}>
+      <img
+        src={app.icon}
+        alt={app.name}
+        className="w-11 h-11 rounded-lg object-contain"
+      />
+    </div>
+    <span className="text-[11px] font-body font-medium text-foreground/80">
+      {app.name}
+    </span>
   </button>
 );
 
