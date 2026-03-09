@@ -4,7 +4,8 @@ import { socialApps } from "@/data/apps";
 import { facts } from "@/data/facts";
 import { Button } from "@/components/ui/button";
 
-const COUNTDOWN_SECONDS = 10;
+const COUNTDOWN_SECONDS = 30;
+const FACT_INTERVAL_SECONDS = 10;
 
 const Intercept = () => {
   const [params] = useSearchParams();
@@ -15,15 +16,16 @@ const Intercept = () => {
   const [done, setDone] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Pick 3 random facts for this session
+  // Pick random facts for this session (one per 10-second interval = 3 facts)
+  const factCount = Math.ceil(COUNTDOWN_SECONDS / FACT_INTERVAL_SECONDS);
   const sessionFacts = useMemo(() => {
     const shuffled = [...facts].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 3);
-  }, []);
+    return shuffled.slice(0, factCount);
+  }, [factCount]);
 
   const currentFactIndex = Math.min(
-    Math.floor(((COUNTDOWN_SECONDS - secondsLeft) / COUNTDOWN_SECONDS) * 3),
-    2
+    Math.floor(((COUNTDOWN_SECONDS - secondsLeft) / FACT_INTERVAL_SECONDS)),
+    factCount - 1
   );
 
   useEffect(() => {
@@ -62,10 +64,14 @@ const Intercept = () => {
       <div className="max-w-sm w-full flex flex-col items-center text-center">
         {/* App icon */}
         <div
-          className="text-5xl mb-2 animate-fade-up"
+          className="mb-2 animate-fade-up"
           style={{ animationDelay: "0.1s" }}
         >
-          {app.icon}
+          <img
+            src={app.icon}
+            alt={app.name}
+            className="w-16 h-16 rounded-2xl object-contain"
+          />
         </div>
         <p
           className="text-sm text-muted-foreground mb-8 animate-fade-up"
