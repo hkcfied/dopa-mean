@@ -19,7 +19,8 @@ const renderIndex = () =>
 describe("Index page", () => {
   it("renders the heading", () => {
     renderIndex();
-    expect(screen.getByText("Take back your time")).toBeInTheDocument();
+    expect(screen.getByText("Take back")).toBeInTheDocument();
+    expect(screen.getByText("your time")).toBeInTheDocument();
   });
 
   it("renders all 9 social apps", () => {
@@ -31,14 +32,14 @@ describe("Index page", () => {
 
   it("generate button is disabled when no apps selected", () => {
     renderIndex();
-    const btn = screen.getByRole("button", { name: /Generate My Shortcuts/i });
+    const btn = screen.getByRole("button", { name: /Select apps to continue/i });
     expect(btn).toBeDisabled();
   });
 
-  it("selecting an app enables the button and updates count", () => {
+  it("selecting an app enables the button", () => {
     renderIndex();
     fireEvent.click(screen.getByText("Instagram"));
-    const btn = screen.getByRole("button", { name: /Generate My Shortcuts \(1\)/i });
+    const btn = screen.getByRole("button", { name: /Generate 1 shortcut/i });
     expect(btn).not.toBeDisabled();
   });
 
@@ -46,21 +47,21 @@ describe("Index page", () => {
     renderIndex();
     fireEvent.click(screen.getByText("Instagram"));
     fireEvent.click(screen.getByText("Instagram"));
-    const btn = screen.getByRole("button", { name: /Generate My Shortcuts \(0\)/i });
+    const btn = screen.getByRole("button", { name: /Select apps to continue/i });
     expect(btn).toBeDisabled();
   });
 
   it("navigates to /instructions on generate", () => {
     renderIndex();
     fireEvent.click(screen.getByText("Instagram"));
-    fireEvent.click(screen.getByRole("button", { name: /Generate My Shortcuts/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Generate/i }));
     expect(mockNavigate).toHaveBeenCalledWith("/instructions");
   });
 
   it("stores selected apps in localStorage", () => {
     renderIndex();
     fireEvent.click(screen.getByText("Reddit"));
-    fireEvent.click(screen.getByRole("button", { name: /Generate My Shortcuts/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Generate/i }));
     const stored = JSON.parse(localStorage.getItem("doombreaker-apps")!);
     expect(stored).toContain("reddit");
   });
