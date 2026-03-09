@@ -42,7 +42,7 @@ describe("Instructions page", () => {
         <Instructions />
       </MemoryRouter>
     );
-    expect(screen.getByText(/Add to Home Screen/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Add to Home Screen/).length).toBeGreaterThanOrEqual(1);
   });
 
   it("shows preview link", () => {

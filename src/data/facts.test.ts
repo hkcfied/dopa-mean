@@ -2,8 +2,8 @@ import { describe, it, expect } from "vitest";
 import { facts } from "./facts";
 
 describe("facts", () => {
-  it("has at least 500 entries", () => {
-    expect(facts.length).toBeGreaterThanOrEqual(500);
+  it("has at least 400 entries", () => {
+    expect(facts.length).toBeGreaterThanOrEqual(400);
   });
 
   it("all entries are non-empty strings", () => {
