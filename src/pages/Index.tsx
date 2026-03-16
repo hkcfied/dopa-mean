@@ -18,7 +18,7 @@ const Index = () => {
 
   const handleGenerate = () => {
     const apps = Array.from(selected);
-    localStorage.setItem("doombreaker-apps", JSON.stringify(apps));
+    localStorage.setItem("dopamean-apps", JSON.stringify(apps));
     navigate("/instructions");
   };
 

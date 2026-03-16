@@ -8,7 +8,7 @@ const Instructions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const stored = localStorage.getItem("doombreaker-apps");
+    const stored = localStorage.getItem("dopamean-apps");
     if (!stored) {
       navigate("/");
       return;

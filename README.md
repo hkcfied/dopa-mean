@@ -1,4 +1,4 @@
-# DoomBreaker
+# Dopa-Mean
 
 Replace doomscrolling with mindful pauses. Create home screen shortcuts that intercept social media habits with science-based friction.
 

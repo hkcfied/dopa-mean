@@ -25,7 +25,7 @@ describe("Instructions page", () => {
   });
 
   it("renders selected apps from localStorage", () => {
-    localStorage.setItem("doombreaker-apps", JSON.stringify(["instagram", "reddit"]));
+    localStorage.setItem("dopamean-apps", JSON.stringify(["instagram", "reddit"]));
     render(
       <MemoryRouter>
         <Instructions />
@@ -36,7 +36,7 @@ describe("Instructions page", () => {
   });
 
   it("renders setup steps", () => {
-    localStorage.setItem("doombreaker-apps", JSON.stringify(["instagram"]));
+    localStorage.setItem("dopamean-apps", JSON.stringify(["instagram"]));
     render(
       <MemoryRouter>
         <Instructions />
@@ -46,7 +46,7 @@ describe("Instructions page", () => {
   });
 
   it("shows preview link", () => {
-    localStorage.setItem("doombreaker-apps", JSON.stringify(["tiktok"]));
+    localStorage.setItem("dopamean-apps", JSON.stringify(["tiktok"]));
     render(
       <MemoryRouter>
         <Instructions />

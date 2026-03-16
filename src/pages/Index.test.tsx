@@ -62,7 +62,7 @@ describe("Index page", () => {
     renderIndex();
     fireEvent.click(screen.getByText("Reddit"));
     fireEvent.click(screen.getByRole("button", { name: /Generate/i }));
-    const stored = JSON.parse(localStorage.getItem("doombreaker-apps")!);
+    const stored = JSON.parse(localStorage.getItem("dopamean-apps")!);
     expect(stored).toContain("reddit");
   });
 });
