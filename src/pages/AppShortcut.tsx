@@ -1,26 +1,15 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { socialApps } from "@/data/apps";
+import { useAppIcon } from "@/hooks/usePlatform";
 import { Button } from "@/components/ui/button";
 import { DOMAIN } from "@/data/constants";
 
 const AppShortcut = () => {
   const { appId } = useParams<{ appId: string }>();
-  const app = socialApps.find((a) => a.id === appId);
+  const app = socialApps.find((a) => a.id === appId) ?? socialApps[0];
+  const icon = useAppIcon(app);
   const [copied, setCopied] = useState(false);
-
-  if (!app) {
-    return (
-      <div className="min-h-screen gradient-earth grain-overlay flex items-center justify-center px-6">
-        <div className="text-center">
-          <p className="text-xl font-display font-semibold text-foreground mb-4">App not found</p>
-          <Link to="/" className="text-primary text-sm font-body hover:underline">
-            ← Back to home
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   // Clean URL for copying/bookmarking (no ?setup=1 — this is what gets added to home screen)
   const bookmarkUrl = `${DOMAIN}/open/${app.id}`;
@@ -57,7 +46,7 @@ const AppShortcut = () => {
           style={{ animationDelay: "0.08s" }}
         >
           <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md border border-border/30 mb-4">
-            <img src={app.icon} alt={app.name} className="w-full h-full object-contain" />
+            <img src={icon} alt={app.name} className="w-full h-full object-contain" />
           </div>
           <h1 className="text-3xl font-display font-bold text-foreground tracking-tight mb-1">
             <span className="italic text-primary">{app.name}</span> shortcut
@@ -90,7 +79,7 @@ const AppShortcut = () => {
                   href={setupUrl}
                   className="flex items-center gap-2 bg-card/70 border border-primary/30 rounded-lg px-3 py-2.5 hover:bg-card transition-colors group"
                 >
-                  <img src={app.icon} alt={app.name} className="w-5 h-5 rounded-md shrink-0 object-contain" />
+                  <img src={icon} alt={app.name} className="w-5 h-5 rounded-md shrink-0 object-contain" />
                   <span className="text-[11px] font-mono text-primary truncate flex-1 group-hover:underline">
                     {bookmarkUrl}
                   </span>

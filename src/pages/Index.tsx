@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { socialApps, SocialApp } from "@/data/apps";
+import { useAppIcon } from "@/hooks/usePlatform";
 import { GITHUB_URL } from "@/data/constants";
 
 const Index = () => {
@@ -118,16 +119,19 @@ const Index = () => {
   );
 };
 
-const AppTile = ({ app }: { app: SocialApp }) => (
-  <Link
-    to={`/app/${app.id}`}
-    className="group flex flex-col items-center gap-2.5 p-4 rounded-xl border border-border/60 bg-card/50 hover:border-primary/25 hover:bg-card/80 transition-all duration-250"
-  >
-    <div className="transition-transform duration-200 group-hover:scale-105">
-      <img src={app.icon} alt={app.name} className="w-11 h-11 rounded-lg object-contain" />
-    </div>
-    <span className="text-[11px] font-body font-medium text-foreground/80">{app.name}</span>
-  </Link>
-);
+const AppTile = ({ app }: { app: SocialApp }) => {
+  const icon = useAppIcon(app);
+  return (
+    <Link
+      to={`/app/${app.id}`}
+      className="group flex flex-col items-center gap-2.5 p-4 rounded-xl border border-border/60 bg-card/50 hover:border-primary/25 hover:bg-card/80 transition-all duration-250"
+    >
+      <div className="transition-transform duration-200 group-hover:scale-105">
+        <img src={icon} alt={app.name} className="w-11 h-11 rounded-lg object-contain" />
+      </div>
+      <span className="text-[11px] font-body font-medium text-foreground/80">{app.name}</span>
+    </Link>
+  );
+};
 
 export default Index;

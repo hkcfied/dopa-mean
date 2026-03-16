@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useSearchParams, useParams, Link } from "react-router-dom";
 import { socialApps } from "@/data/apps";
+import { useAppIcon } from "@/hooks/usePlatform";
 import { facts } from "@/data/facts";
 import { Button } from "@/components/ui/button";
 import { GITHUB_URL } from "@/data/constants";
@@ -16,7 +17,8 @@ const Intercept = () => {
   const [params] = useSearchParams();
   const { appId: pathAppId } = useParams<{ appId: string }>();
   const appId = pathAppId ?? params.get("app");
-  const app = socialApps.find((a) => a.id === appId);
+  const app = socialApps.find((a) => a.id === appId) ?? socialApps[0];
+  const icon = useAppIcon(app);
 
   // Setup mode: came from within the app (?setup=1), not from a home screen shortcut
   const isSetupMode = params.get("setup") === "1" && !isStandalone();
@@ -76,7 +78,7 @@ const Intercept = () => {
         {/* App icon */}
         <div className="mb-3 opacity-0 animate-fade-up animate-drift" style={{ animationDelay: "0.05s" }}>
           <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-sm border border-border/30">
-            <img src={app.icon} alt={app.name} className="w-full h-full object-contain" />
+            <img src={icon} alt={app.name} className="w-full h-full object-contain" />
           </div>
         </div>
 
