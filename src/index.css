@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 96%;
+    --foreground: 30 20% 14%;
+
+    --card: 38 35% 94%;
+    --card-foreground: 30 20% 14%;
+
+    --popover: 38 35% 94%;
+    --popover-foreground: 30 20% 14%;
+
+    --primary: 152 35% 38%;
+    --primary-foreground: 40 30% 96%;
+
+    --secondary: 28 45% 82%;
+    --secondary-foreground: 30 30% 18%;
+
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 12% 48%;
+
+    --accent: 28 60% 70%;
+    --accent-foreground: 30 30% 14%;
+
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 22% 85%;
+    --input: 35 22% 85%;
+    --ring: 152 35% 38%;
+
+    --radius: 0.75rem;
+
+    /* Palette tokens */
+    --earth-moss: 152 35% 38%;
+    --earth-terracotta: 16 55% 58%;
+    --earth-sand: 38 40% 88%;
+    --earth-clay: 22 35% 72%;
+    --earth-bark: 25 22% 28%;
+    --earth-sage: 145 18% 62%;
+    --earth-cream: 42 50% 95%;
+    --earth-gold: 42 65% 55%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 25 18% 8%;
+    --foreground: 38 25% 88%;
+
+    --card: 25 16% 12%;
+    --card-foreground: 38 25% 88%;
+
+    --popover: 25 16% 12%;
+    --popover-foreground: 38 25% 88%;
+
+    --primary: 152 30% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 28 20% 22%;
+    --secondary-foreground: 28 45% 82%;
+
+    --muted: 25 12% 16%;
+    --muted-foreground: 30 12% 52%;
+
+    --accent: 28 30% 30%;
+    --accent-foreground: 28 45% 82%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 25 12% 18%;
+    --input: 25 12% 18%;
+    --ring: 152 30% 48%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  ::selection {
+    background: hsl(152 35% 38% / 0.2);
+  }
+}
+
+@layer components {
+  .grain-overlay {
+    position: relative;
+  }
+  .grain-overlay::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 50;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px;
+  }
+}
+
+@layer utilities {
+  .gradient-earth {
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, hsl(var(--earth-sage) / 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, hsl(var(--earth-terracotta) / 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 90% 70% at 50% 50%, hsl(var(--earth-cream)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .gradient-intercept {
+    background:
+      radial-gradient(ellipse 70% 60% at 30% 20%, hsl(var(--earth-moss) / 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 70% 70%, hsl(var(--earth-terracotta) / 0.08) 0%, transparent 50%),
+      linear-gradient(175deg, hsl(var(--earth-cream)) 0%, hsl(var(--earth-sand) / 0.6) 50%, hsl(var(--background)) 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

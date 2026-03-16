@@ -1,0 +1,16 @@
+{
+  "name": "Dopa-Mean",
+  "short_name": "Dopa-Mean",
+  "description": "Break the scroll habit with mindful interception",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5E6D3",
+  "theme_color": "#F5E6D3",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
