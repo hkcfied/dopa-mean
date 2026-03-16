@@ -1,0 +1,15 @@
+{
+  "name": "Threads",
+  "short_name": "Threads",
+  "start_url": "/intercept?app=threads",
+  "display": "standalone",
+  "background_color": "#F5E6D3",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icons/threads.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

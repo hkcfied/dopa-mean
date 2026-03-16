@@ -1,0 +1,15 @@
+{
+  "name": "Facebook",
+  "short_name": "Facebook",
+  "start_url": "/intercept?app=facebook",
+  "display": "standalone",
+  "background_color": "#F5E6D3",
+  "theme_color": "#1877F2",
+  "icons": [
+    {
+      "src": "/icons/facebook.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "YouTube",
+  "short_name": "YouTube",
+  "start_url": "/intercept?app=youtube",
+  "display": "standalone",
+  "background_color": "#F5E6D3",
+  "theme_color": "#FF0000",
+  "icons": [
+    {
+      "src": "/icons/youtube.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

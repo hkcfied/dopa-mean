@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Instructions from "./pages/Instructions";
+import AppShortcut from "./pages/AppShortcut";
 import Intercept from "./pages/Intercept";
 import NotFound from "./pages/NotFound";
 
@@ -18,7 +18,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/instructions" element={<Instructions />} />
+          <Route path="/app/:appId" element={<AppShortcut />} />
           <Route path="/intercept" element={<Intercept />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,0 +1,15 @@
+{
+  "name": "Reddit",
+  "short_name": "Reddit",
+  "start_url": "/intercept?app=reddit",
+  "display": "standalone",
+  "background_color": "#F5E6D3",
+  "theme_color": "#FF4500",
+  "icons": [
+    {
+      "src": "/icons/reddit.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
