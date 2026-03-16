@@ -29,6 +29,11 @@ const sections = [
   },
   {
     n: "06",
+    title: "You can delete the original app",
+    body: "Dopa-Mean is not a replacement app. It is a home screen shortcut — a lightweight trigger that activates a 30-second pause before letting you continue. You can delete the original social media app entirely. This shortcut won't re-install it or try to pull you back toward the original app. The pause works the same way whether the app is on your phone or not. You keep the friction. You lose the convenience.",
+  },
+  {
+    n: "07",
     title: "Awareness, not abstinence",
     body: "Dopa-Mean does not try to stop you from using social media. It tries to make your use intentional. The goal is not willpower or self-denial — it is the insertion of a moment of awareness between the urge and the action. After 30 seconds, you are free to continue. Some days you will. Many days you won't. That asymmetry, compounded over time, is how behavior change actually works.",
   },
@@ -61,10 +66,10 @@ const Why = () => (
         </p>
         <h1 className="text-4xl font-display font-bold text-foreground tracking-tight leading-[1.1] mb-4">
           Why a 30-second pause<br />
-          <span className="italic text-primary">actually works</span>
+          <span className="italic text-primary">replaces willpower</span>
         </h1>
         <p className="text-sm text-muted-foreground font-light leading-relaxed">
-          This is not a productivity app. It is a neuroscience tool built on decades of research into habit formation, impulse control, and the attention economy.
+          This is not a replacement app. It is a home screen shortcut — a lightweight friction tool built on decades of neuroscience research into habit formation, impulse control, and the attention economy.
         </p>
       </div>
 
@@ -110,11 +115,11 @@ const Why = () => (
         style={{ animationDelay: "0.72s" }}
       >
         <p className="text-sm text-muted-foreground font-light mb-5 leading-relaxed max-w-xs mx-auto">
-          Every pause is a small act of rebellion against an industry built to exploit your attention.
+          You can delete the original app. The shortcut stays. The pause works. Every moment of friction is a small act of taking your attention back.
         </p>
         <Link to="/">
           <Button className="h-12 px-8 rounded-xl text-sm font-body font-semibold bg-primary text-primary-foreground hover:brightness-110 shadow-sm">
-            Choose an app to intercept →
+            Create your first shortcut →
           </Button>
         </Link>
       </div>
