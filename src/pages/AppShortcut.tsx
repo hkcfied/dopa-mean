@@ -82,17 +82,24 @@ const AppShortcut = () => {
             {/* Step 1 */}
             <div className="flex gap-4 items-start">
               <span className="text-lg font-display font-bold text-primary/35 tabular-nums shrink-0 w-6 text-right mt-0.5">01</span>
-              <div>
-                <p className="text-sm text-foreground font-body font-medium mb-1">Open this link in Safari</p>
-                <div className="flex items-center gap-2 bg-card/70 border border-border/50 rounded-lg px-3 py-2">
-                  <span className="text-[11px] font-mono text-muted-foreground truncate flex-1">{bookmarkUrl}</span>
+              <div className="flex-1">
+                <p className="text-sm text-foreground font-body font-medium mb-2">Open this link in Safari</p>
+                {/* Tappable link + copy button */}
+                <a
+                  href={bookmarkUrl}
+                  className="flex items-center gap-2 bg-card/70 border border-primary/30 rounded-lg px-3 py-2.5 hover:bg-card transition-colors group"
+                >
+                  <img src={app.icon} alt={app.name} className="w-5 h-5 rounded-md shrink-0 object-contain" />
+                  <span className="text-[11px] font-mono text-primary truncate flex-1 group-hover:underline">
+                    {bookmarkUrl}
+                  </span>
                   <button
-                    onClick={handleCopy}
-                    className="shrink-0 text-xs font-body font-medium text-primary hover:opacity-70 transition-opacity"
+                    onClick={(e) => { e.preventDefault(); handleCopy(); }}
+                    className="shrink-0 text-xs font-body font-medium text-muted-foreground hover:text-primary transition-colors px-1"
                   >
-                    {copied ? "Copied!" : "Copy"}
+                    {copied ? "✓" : "Copy"}
                   </button>
-                </div>
+                </a>
               </div>
             </div>
 
@@ -101,9 +108,9 @@ const AppShortcut = () => {
               <span className="text-lg font-display font-bold text-primary/35 tabular-nums shrink-0 w-6 text-right mt-0.5">02</span>
               <div className="flex-1">
                 <p className="text-sm text-foreground font-body font-medium mb-2">Tap the Share button in Safari</p>
-                {/* iOS Share icon callout */}
                 <div className="flex items-center gap-3 bg-card/70 border border-border/50 rounded-lg px-4 py-3">
                   <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                    {/* iOS-style share icon: box with upward arrow */}
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
                       <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
                       <polyline points="16 6 12 2 8 6" />
@@ -123,14 +130,14 @@ const AppShortcut = () => {
               <div>
                 <p className="text-sm text-foreground font-body font-medium mb-1">Tap "Add to Home Screen"</p>
                 <p className="text-xs text-muted-foreground font-body leading-snug">
-                  Scroll down in the share sheet. The name <span className="font-semibold text-foreground">"{app.name}"</span> is already set — just tap <span className="font-semibold text-foreground">Add</span>.
+                  Scroll down in the share sheet. The name <span className="font-semibold text-foreground">"{app.name}"</span> and icon are already set — just tap <span className="font-semibold text-foreground">Add</span>.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Preview */}
+        {/* Tip */}
         <div
           className="rounded-xl p-4 text-sm border border-primary/15 bg-primary/5 mb-8 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.28s" }}
@@ -146,7 +153,7 @@ const AppShortcut = () => {
           style={{ animationDelay: "0.36s" }}
         >
           <p className="text-xs text-muted-foreground/60 mb-2">Want to see how it feels?</p>
-          <Link to={`/intercept?app=${app.id}`}>
+          <Link to={`/open/${app.id}`}>
             <Button
               variant="ghost"
               className="text-primary font-body font-semibold text-sm hover:bg-primary/5"

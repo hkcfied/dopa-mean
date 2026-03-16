@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import { socialApps } from "@/data/apps";
 import { facts } from "@/data/facts";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,8 @@ const FACT_INTERVAL_SECONDS = 10;
 
 const Intercept = () => {
   const [params] = useSearchParams();
-  const appId = params.get("app");
+  const { appId: pathAppId } = useParams<{ appId: string }>();
+  const appId = pathAppId ?? params.get("app");
   const app = socialApps.find((a) => a.id === appId);
 
   const [secondsLeft, setSecondsLeft] = useState(COUNTDOWN_SECONDS);
