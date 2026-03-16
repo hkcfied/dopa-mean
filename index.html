@@ -20,6 +20,23 @@
 
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href="/favicon.ico" />
+    <script>
+      // Restore path from GitHub Pages SPA redirect
+      (function() {
+        var p = window.location.search.slice(1);
+        if (p !== undefined) {
+          var params = new URLSearchParams(p);
+          var encoded = params.get('p');
+          if (encoded) {
+            var decoded = decodeURIComponent(encoded);
+            var i = decoded.indexOf('&');
+            var path = decoded.slice(0, i >= 0 ? i : undefined);
+            var query = i >= 0 ? '?' + decoded.slice(i + 1) : '';
+            window.history.replaceState(null, null, '/' + path + query + window.location.hash);
+          }
+        }
+      })();
+    </script>
   </head>
 
   <body>
