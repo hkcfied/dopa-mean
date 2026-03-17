@@ -19,6 +19,7 @@ const apps = [
   { id: "facebook",  name: "Facebook",  color: "#1877F2" },
   { id: "youtube",   name: "YouTube",   color: "#FF0000" },
   { id: "threads",   name: "Threads",   color: "#000000" },
+  { id: "discord",   name: "Discord",   color: "#5865F2" },
   { id: "linkedin",  name: "LinkedIn",  color: "#0A66C2" },
 ];
 
@@ -62,5 +63,25 @@ for (const app of apps) {
   const outDir = join(distDir, "open", app.id);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, "index.html"), html);
-  console.log(`✓ dist/open/${app.id}/index.html`);
+
+  // Generate per-app manifest.json
+  const manifest = {
+    name: app.name,
+    short_name: app.name,
+    description: `Mindful pause before opening ${app.name}`,
+    start_url: `/open/${app.id}`,
+    display: "standalone",
+    background_color: app.color,
+    theme_color: app.color,
+    icons: [
+      {
+        src: `/icons/${app.id}.png`,
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+    ],
+  };
+  writeFileSync(join(outDir, "manifest.json"), JSON.stringify(manifest, null, 2));
+  console.log(`✓ dist/open/${app.id}/index.html + manifest.json`);
 }
