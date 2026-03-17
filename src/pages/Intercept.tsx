@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useSearchParams, useParams, Link } from "react-router-dom";
 import { socialApps } from "@/data/apps";
-import { useAppIcon } from "@/hooks/usePlatform";
+import { useAppIcon, usePlatform } from "@/hooks/usePlatform";
 import { facts } from "@/data/facts";
 import { Button } from "@/components/ui/button";
 import { GITHUB_URL } from "@/data/constants";
@@ -19,6 +19,7 @@ const Intercept = () => {
   const appId = pathAppId ?? params.get("app");
   const app = socialApps.find((a) => a.id === appId) ?? socialApps[0];
   const icon = useAppIcon(app);
+  const platform = usePlatform();
 
   // Setup mode: came from within the app (?setup=1), not from a home screen shortcut
   const isSetupMode = params.get("setup") === "1" && !isStandalone();
@@ -104,7 +105,7 @@ const Intercept = () => {
 
         {/* Body content: facts (returning) vs install guide (setup) */}
         {isSetupMode ? (
-          <SetupGuide app={app} done={done} />
+          <SetupGuide app={app} done={done} platform={platform} />
         ) : (
           <>
             <div className="min-h-[90px] flex items-center justify-center mb-12 px-2">
@@ -147,7 +148,9 @@ const Intercept = () => {
   );
 };
 
-const SetupGuide = ({ app, done }: { app: { name: string }; done: boolean }) => (
+const SetupGuide = ({ app, done, platform }: { app: { name: string }; done: boolean; platform: import("@/data/apps").Platform }) => {
+  const isAndroid = platform === "android";
+  return (
   <div className="w-full">
     {!done ? (
       <div
@@ -162,21 +165,35 @@ const SetupGuide = ({ app, done }: { app: { name: string }; done: boolean }) => 
             <span className="text-base font-display font-bold text-primary/35 shrink-0 w-5 text-right leading-tight">1</span>
             <div className="flex items-center gap-2.5">
               <div className="shrink-0 w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                  <polyline points="16 6 12 2 8 6" />
-                  <line x1="12" y1="2" x2="12" y2="15" />
-                </svg>
+                {isAndroid ? (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
+                    <circle cx="12" cy="5" r="1.5" />
+                    <circle cx="12" cy="12" r="1.5" />
+                    <circle cx="12" cy="19" r="1.5" />
+                  </svg>
+                ) : (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg>
+                )}
               </div>
               <p className="text-xs text-foreground/80 font-body leading-snug">
-                Tap the <span className="font-semibold text-foreground">Share button</span> at the bottom of Safari
+                {isAndroid
+                  ? <>Tap the <span className="font-semibold text-foreground">⋮ menu</span> at the top right of Chrome</>
+                  : <>Tap the <span className="font-semibold text-foreground">Share button</span> at the bottom of Safari</>
+                }
               </p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
             <span className="text-base font-display font-bold text-primary/35 shrink-0 w-5 text-right leading-tight">2</span>
             <p className="text-xs text-foreground/80 font-body leading-snug pt-0.5">
-              Scroll down and tap <span className="font-semibold text-foreground">"Add to Home Screen"</span>
+              {isAndroid
+                ? <>Tap <span className="font-semibold text-foreground">"Add to Home screen"</span></>
+                : <>Scroll down and tap <span className="font-semibold text-foreground">"Add to Home Screen"</span></>
+              }
             </p>
           </div>
           <div className="flex gap-3 items-start">
@@ -217,6 +234,7 @@ const SetupGuide = ({ app, done }: { app: { name: string }; done: boolean }) => 
       </div>
     )}
   </div>
-);
+  );
+};
 
 export default Intercept;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { socialApps } from "@/data/apps";
-import { useAppIcon } from "@/hooks/usePlatform";
+import { useAppIcon, usePlatform } from "@/hooks/usePlatform";
 import { Button } from "@/components/ui/button";
 import { DOMAIN } from "@/data/constants";
 
@@ -9,6 +9,8 @@ const AppShortcut = () => {
   const { appId } = useParams<{ appId: string }>();
   const app = socialApps.find((a) => a.id === appId) ?? socialApps[0];
   const icon = useAppIcon(app);
+  const platform = usePlatform();
+  const isAndroid = platform === "android";
   const [copied, setCopied] = useState(false);
 
   // Clean URL for copying/bookmarking (no ?setup=1 — this is what gets added to home screen)
@@ -72,7 +74,9 @@ const AppShortcut = () => {
             <div className="flex gap-4 items-start">
               <span className="text-lg font-display font-bold text-primary/35 tabular-nums shrink-0 w-6 text-right mt-0.5">01</span>
               <div className="flex-1">
-                <p className="text-sm text-foreground font-body font-medium mb-2">Open this link in Safari</p>
+                <p className="text-sm text-foreground font-body font-medium mb-2">
+                  Open this link in {isAndroid ? "Chrome" : "Safari"}
+                </p>
                 <a
                   href={setupUrl}
                   className="flex items-center gap-2 bg-card/70 border border-primary/30 rounded-lg px-3 py-2.5 hover:bg-card transition-colors group"
@@ -95,19 +99,39 @@ const AppShortcut = () => {
             <div className="flex gap-4 items-start">
               <span className="text-lg font-display font-bold text-primary/35 tabular-nums shrink-0 w-6 text-right mt-0.5">02</span>
               <div className="flex-1">
-                <p className="text-sm text-foreground font-body font-medium mb-2">Tap the Share button in Safari</p>
-                <div className="flex items-center gap-3 bg-card/70 border border-border/50 rounded-lg px-4 py-3">
-                  <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                      <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                      <polyline points="16 6 12 2 8 6" />
-                      <line x1="12" y1="2" x2="12" y2="15" />
-                    </svg>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-body leading-snug">
-                    The share icon is at the <span className="font-semibold text-foreground">bottom center</span> of Safari's toolbar
-                  </p>
-                </div>
+                {isAndroid ? (
+                  <>
+                    <p className="text-sm text-foreground font-body font-medium mb-2">Tap the menu in Chrome</p>
+                    <div className="flex items-center gap-3 bg-card/70 border border-border/50 rounded-lg px-4 py-3">
+                      <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-primary">
+                          <circle cx="12" cy="5" r="1.5" />
+                          <circle cx="12" cy="12" r="1.5" />
+                          <circle cx="12" cy="19" r="1.5" />
+                        </svg>
+                      </div>
+                      <p className="text-xs text-muted-foreground font-body leading-snug">
+                        Tap the <span className="font-semibold text-foreground">⋮ three-dot menu</span> at the top right of Chrome
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm text-foreground font-body font-medium mb-2">Tap the Share button in Safari</p>
+                    <div className="flex items-center gap-3 bg-card/70 border border-border/50 rounded-lg px-4 py-3">
+                      <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                          <polyline points="16 6 12 2 8 6" />
+                          <line x1="12" y1="2" x2="12" y2="15" />
+                        </svg>
+                      </div>
+                      <p className="text-xs text-muted-foreground font-body leading-snug">
+                        The share icon is at the <span className="font-semibold text-foreground">bottom center</span> of Safari's toolbar
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -117,7 +141,10 @@ const AppShortcut = () => {
               <div>
                 <p className="text-sm text-foreground font-body font-medium mb-1">Tap "Add to Home Screen"</p>
                 <p className="text-xs text-muted-foreground font-body leading-snug">
-                  Scroll down in the share sheet. The name <span className="font-semibold text-foreground">"{app.name}"</span> and icon are already set — just tap <span className="font-semibold text-foreground">Add</span>.
+                  {isAndroid
+                    ? <>Select <span className="font-semibold text-foreground">"Add to Home screen"</span> from the menu. The name <span className="font-semibold text-foreground">"{app.name}"</span> is already set — tap <span className="font-semibold text-foreground">Add</span>.</>
+                    : <>Scroll down in the share sheet. The name <span className="font-semibold text-foreground">"{app.name}"</span> and icon are already set — just tap <span className="font-semibold text-foreground">Add</span>.</>
+                  }
                 </p>
               </div>
             </div>
