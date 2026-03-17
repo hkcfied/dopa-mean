@@ -45,9 +45,7 @@ const AppShortcut = () => {
           className="flex flex-col items-center text-center mb-10 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.08s" }}
         >
-          <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md border border-border/30 mb-4">
-            <img src={icon} alt={app.name} className="w-full h-full object-contain" />
-          </div>
+          <img src={icon} alt={app.name} className="w-20 h-20 rounded-2xl object-cover shadow-md mb-4" />
           <h1 className="text-3xl font-display font-bold text-foreground tracking-tight mb-1">
             <span className="italic text-primary">{app.name}</span> shortcut
           </h1>
@@ -79,7 +77,7 @@ const AppShortcut = () => {
                   href={setupUrl}
                   className="flex items-center gap-2 bg-card/70 border border-primary/30 rounded-lg px-3 py-2.5 hover:bg-card transition-colors group"
                 >
-                  <img src={icon} alt={app.name} className="w-5 h-5 rounded-md shrink-0 object-contain" />
+                  <img src={icon} alt={app.name} className="w-5 h-5 rounded-md shrink-0 object-cover" />
                   <span className="text-[11px] font-mono text-primary truncate flex-1 group-hover:underline">
                     {bookmarkUrl}
                   </span>

@@ -127,7 +127,7 @@ const AppTile = ({ app }: { app: SocialApp }) => {
       className="group flex flex-col items-center gap-2.5 p-4 rounded-xl border border-border/60 bg-card/50 hover:border-primary/25 hover:bg-card/80 transition-all duration-250"
     >
       <div className="transition-transform duration-200 group-hover:scale-105">
-        <img src={icon} alt={app.name} className="w-11 h-11 rounded-lg object-contain" />
+        <img src={icon} alt={app.name} className="w-11 h-11 rounded-xl object-cover" />
       </div>
       <span className="text-[11px] font-body font-medium text-foreground/80">{app.name}</span>
     </Link>

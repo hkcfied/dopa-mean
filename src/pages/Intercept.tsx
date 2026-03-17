@@ -77,9 +77,7 @@ const Intercept = () => {
 
         {/* App icon */}
         <div className="mb-3 opacity-0 animate-fade-up animate-drift" style={{ animationDelay: "0.05s" }}>
-          <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-sm border border-border/30">
-            <img src={icon} alt={app.name} className="w-full h-full object-contain" />
-          </div>
+          <img src={icon} alt={app.name} className="w-16 h-16 rounded-2xl object-cover shadow-sm" />
         </div>
 
         <p className="text-sm text-muted-foreground/70 mb-10 font-body font-light opacity-0 animate-fade-up" style={{ animationDelay: "0.1s" }}>

@@ -110,7 +110,7 @@ export const socialApps: SocialApp[] = [
     iconIos: threadsIos,
     iconAndroid: threadsAndroid,
     color: "#000000",
-    url: "https://www.threads.net",
+    url: "https://www.threads.com",
   },
   {
     id: "discord",
