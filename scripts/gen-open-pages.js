@@ -66,10 +66,12 @@ for (const app of apps) {
 
   // Generate per-app manifest.json
   const manifest = {
+    id: `/open/${app.id}`,
     name: app.name,
     short_name: app.name,
     description: `Mindful pause before opening ${app.name}`,
     start_url: `/open/${app.id}`,
+    scope: `/open/${app.id}`,
     display: "standalone",
     background_color: app.color,
     theme_color: app.color,
