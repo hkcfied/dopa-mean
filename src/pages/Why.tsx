@@ -4,36 +4,43 @@ import { Button } from "@/components/ui/button";
 const sections = [
   {
     n: "01",
+    id: "dopamine-trap",
     title: "The dopamine trap",
     body: "Social media is engineered around variable ratio reinforcement — the same mechanism that makes slot machines impossible to put down. Your brain doesn't get rewarded every time you scroll. It gets rewarded unpredictably. That unpredictability is what keeps you coming back. Dopamine isn't released when you get the reward — it surges in anticipation of it. The scroll is the lever. The 'like' is the jackpot you can never quite predict.",
   },
   {
     n: "02",
+    id: "urge-fades",
     title: "The urge fades in 30 seconds",
     body: "Neuroscience research shows that cravings — including the impulse to open a social app — follow a predictable curve. They peak quickly and, if you don't act on them, begin to fade within 20–40 seconds. Most people never experience this because they reach for their phone before the urge has a chance to pass. The 30-second countdown is not arbitrary. It is the minimum time needed for your limbic system (the impulse brain) to lose momentum.",
   },
   {
     n: "03",
+    id: "friction",
     title: "Friction changes behavior",
     body: "Behavioral economics research consistently shows that tiny amounts of friction dramatically reduce habitual actions. Adding just 20 seconds of delay to an impulse — enough to require a conscious step — reduces compulsive behavior significantly. You don't need willpower. You need an environment that creates a pause between stimulus and response. Dopa-Mean is that pause, built directly into your home screen.",
   },
   {
     n: "04",
+    id: "prefrontal-cortex",
     title: "The prefrontal cortex needs a moment",
     body: "When you reach for a social app on autopilot, the prefrontal cortex — the part of your brain responsible for deliberate decision-making — is bypassed entirely. The habit fires before rational thought gets a chance to intervene. A forced 30-second window activates the prefrontal cortex and gives it time to ask the question your brain skipped: do I actually want to do this right now? Often, the answer is no.",
   },
   {
     n: "05",
+    id: "neuroplasticity",
     title: "You are rewiring your brain",
     body: "Neuroplasticity is the brain's capacity to physically restructure itself based on repeated experience. Every time you scroll without pause, you strengthen the neural pathway that makes that behavior feel automatic. Every time you pause and choose not to scroll, you weaken that pathway and build a new one. This is not a metaphor. The myelin sheath around neurons thickens with use and thins with disuse. Each pause is a microscopic act of rewiring.",
   },
   {
     n: "06",
+    id: "delete-the-app",
     title: "You can delete the original app",
     body: "Dopa-Mean is not a replacement app. It is a home screen shortcut — a lightweight trigger that activates a 30-second pause before letting you continue. You can delete the original social media app entirely. This shortcut won't re-install it or try to pull you back toward the original app. The pause works the same way whether the app is on your phone or not. You keep the friction. You lose the convenience.",
   },
   {
     n: "07",
+    id: "awareness",
     title: "Awareness, not abstinence",
     body: "Dopa-Mean does not try to stop you from using social media. It tries to make your use intentional. The goal is not willpower or self-denial — it is the insertion of a moment of awareness between the urge and the action. After 30 seconds, you are free to continue. Some days you will. Many days you won't. That asymmetry, compounded over time, is how behavior change actually works.",
   },
@@ -78,7 +85,8 @@ const Why = () => (
         {sections.map((s, i) => (
           <div
             key={s.n}
-            className="opacity-0 animate-fade-up"
+            id={s.id}
+            className="opacity-0 animate-fade-up scroll-mt-8"
             style={{ animationDelay: `${0.16 + i * 0.07}s` }}
           >
             <div className="flex items-baseline gap-4 mb-3">

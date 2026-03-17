@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5E6D3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EDD9C0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Full canvas background -->
+  <rect width="1200" height="1200" fill="url(#bg)" />
+
+  <!-- Everything lives in top 630px of the 1200px canvas -->
+
+  <!-- Left column -->
+  <text x="90" y="90" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#8B7355" opacity="0.6" letter-spacing="4">DOPA-MEAN</text>
+  <text x="90" y="200" font-family="Georgia, serif" font-size="90" font-weight="700" fill="#2C2416">Take back</text>
+  <text x="90" y="305" font-family="Georgia, serif" font-size="90" font-weight="700" font-style="italic" fill="#8B6914">your time.</text>
+  <text x="90" y="375" font-family="-apple-system, Helvetica, sans-serif" font-size="24" fill="#6B5A3E" opacity="0.7" font-weight="300">A 30-second pause before every social media open.</text>
+  <text x="90" y="408" font-family="-apple-system, Helvetica, sans-serif" font-size="24" fill="#6B5A3E" opacity="0.7" font-weight="300">The placebo effect is the point.</text>
+  <line x1="90" y1="480" x2="580" y2="480" stroke="#8B7355" stroke-width="1" opacity="0.2" />
+  <text x="90" y="510" font-family="-apple-system, Helvetica, sans-serif" font-size="16" fill="#8B7355" opacity="0.45" letter-spacing="1">dopamean.hidas.dev</text>
+
+  <!-- Right column: countdown ring centered at x=930, y=310 -->
+  <circle cx="930" cy="315" r="200" fill="#8B6914" opacity="0.05" />
+  <circle cx="930" cy="315" r="165" fill="none" stroke="#8B7355" stroke-width="3" opacity="0.18" />
+  <circle cx="930" cy="315" r="165" fill="none" stroke="#8B6914" stroke-width="7" stroke-linecap="round"
+    stroke-dasharray="1037" stroke-dashoffset="259"
+    transform="rotate(-90 930 315)" opacity="0.85" />
+  <circle cx="930" cy="315" r="152" fill="#F0DFC8" opacity="0.4" />
+  <text x="930" y="295" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, serif" font-size="110" font-weight="700" fill="#2C2416">30</text>
+  <text x="930" y="368" text-anchor="middle" font-family="-apple-system, Helvetica, sans-serif" font-size="14" fill="#8B7355" opacity="0.45" letter-spacing="4">SECONDS</text>
+  <text x="930" y="420" text-anchor="middle" font-family="-apple-system, Helvetica, sans-serif" font-size="15" fill="#8B7355" opacity="0.32" letter-spacing="1">Take a breath…</text>
+</svg>

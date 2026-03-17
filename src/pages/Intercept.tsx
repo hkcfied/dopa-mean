@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useSearchParams, useParams, Link } from "react-router-dom";
-import { socialApps } from "@/data/apps";
+import { socialApps, SocialApp } from "@/data/apps";
 import { useAppIcon, usePlatform } from "@/hooks/usePlatform";
 import { facts } from "@/data/facts";
 import { Button } from "@/components/ui/button";
@@ -118,24 +118,8 @@ const Intercept = () => {
             </div>
 
             {done ? (
-              <div className="w-full space-y-3 opacity-0 animate-fade-up" style={{ animationDelay: "0s" }}>
-                <Button
-                  variant="outline"
-                  className="w-full h-12 rounded-xl text-sm border-border/60 font-body hover:bg-card/80 transition-colors"
-                  onClick={() => window.open(app.url, "_blank")}
-                >
-                  Continue to {app.name}
-                </Button>
-                <Button
-                  className="w-full h-12 rounded-xl text-sm font-body font-semibold shadow-sm bg-primary text-primary-foreground hover:brightness-110"
-                  onClick={() => window.close()}
-                >
-                  🌿 I don't need this right now
-                </Button>
-                <p className="text-[11px] text-muted-foreground/50 pt-3 font-body">
-                  You paused. That takes strength. 💛
-                </p>
-              </div>
+              <DoneActions app={app} />
+
             ) : (
               <p className="text-xs text-muted-foreground/50 animate-breathe font-body font-light tracking-wide">
                 Take a breath…
@@ -147,6 +131,27 @@ const Intercept = () => {
     </div>
   );
 };
+
+const DoneActions = ({ app }: { app: SocialApp }) => (
+  <div className="w-full space-y-3 opacity-0 animate-fade-up" style={{ animationDelay: "0s" }}>
+    <Button
+      variant="outline"
+      className="w-full h-12 rounded-xl text-sm border-border/60 font-body hover:bg-card/80 transition-colors"
+      onClick={() => window.open(app.url, "_blank")}
+    >
+      Continue to {app.name}
+    </Button>
+    <Button
+      className="w-full h-12 rounded-xl text-sm font-body font-semibold shadow-sm bg-primary text-primary-foreground hover:brightness-110"
+      onClick={() => window.close()}
+    >
+      🌿 I don't need this right now
+    </Button>
+    <p className="text-[11px] text-muted-foreground/50 pt-3 font-body">
+      You paused. That takes strength. 💛
+    </p>
+  </div>
+);
 
 const SetupGuide = ({ app, done, platform }: { app: { name: string }; done: boolean; platform: import("@/data/apps").Platform }) => {
   const isAndroid = platform === "android";
