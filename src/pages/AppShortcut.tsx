@@ -81,6 +81,7 @@ const AppShortcut = () => {
                 </p>
                 <a
                   href={setupUrl}
+                  onClick={() => trackInstallation()}
                   className="flex items-center gap-2 bg-card/70 border border-primary/30 rounded-lg px-3 py-2.5 hover:bg-card transition-colors group"
                 >
                   <img src={icon} alt={app.name} className="w-5 h-5 rounded-md shrink-0 object-cover" />

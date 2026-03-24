@@ -111,11 +111,9 @@ const Index = () => {
               Star on GitHub
             </a>
           </div>
-          {installCount !== null && (
-            <p className="text-center text-[10px] text-muted-foreground/40 font-body tracking-wide mb-1">
-              {installCount.toLocaleString()} shortcuts created
-            </p>
-          )}
+          <p className="text-center text-[10px] text-muted-foreground/40 font-body tracking-wide mb-1">
+            {installCount !== null ? `${installCount.toLocaleString()} shortcuts created` : "· · ·"}
+          </p>
           <p className="text-center text-[10px] text-muted-foreground/50 font-body tracking-wide">
             Open source · no personal tracking · works on your device
           </p>
