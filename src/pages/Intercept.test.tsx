@@ -62,4 +62,31 @@ describe("Intercept page", () => {
     renderIntercept("?app=bogus");
     expect(screen.getByText("Go home")).toBeInTheDocument();
   });
+
+  it("resets timer on visibilitychange in standalone mode", () => {
+    // Mock standalone mode
+    Object.defineProperty(window.navigator, "standalone", { value: true, writable: true, configurable: true });
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: query === "(display-mode: standalone)",
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      onchange: null,
+      dispatchEvent: vi.fn(),
+    }));
+
+    renderIntercept("?app=instagram");
+    // Complete the timer
+    act(() => { vi.advanceTimersByTime(30000); });
+    expect(screen.getByText("0")).toBeInTheDocument();
+
+    // Simulate returning to foreground
+    Object.defineProperty(document, "visibilityState", { value: "visible", writable: true, configurable: true });
+    act(() => { document.dispatchEvent(new Event("visibilitychange")); });
+
+    // Timer should reset
+    expect(screen.getByText("30")).toBeInTheDocument();
+  });
 });

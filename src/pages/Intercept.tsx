@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useSearchParams, useParams, Link } from "react-router-dom";
 import { socialApps, SocialApp } from "@/data/apps";
 import { useAppIcon, usePlatform } from "@/hooks/usePlatform";
@@ -29,17 +29,25 @@ const Intercept = () => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const factCount = Math.ceil(COUNTDOWN_SECONDS / FACT_INTERVAL_SECONDS);
-  const sessionFacts = useMemo(() => {
+
+  const pickFacts = () => {
     const shuffled = [...facts].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, factCount);
-  }, [factCount]);
+  };
+
+  const [sessionFacts, setSessionFacts] = useState(pickFacts);
 
   const currentFactIndex = Math.min(
     Math.floor((COUNTDOWN_SECONDS - secondsLeft) / FACT_INTERVAL_SECONDS),
     factCount - 1
   );
 
-  useEffect(() => {
+  // Start (or restart) the countdown timer
+  const startTimer = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    setSecondsLeft(COUNTDOWN_SECONDS);
+    setDone(false);
+    setSessionFacts(pickFacts());
     intervalRef.current = setInterval(() => {
       setSecondsLeft((s) => {
         if (s <= 1) {
@@ -50,10 +58,26 @@ const Intercept = () => {
         return s - 1;
       });
     }, 1000);
+  }, []);
+
+  // Initial timer start on mount
+  useEffect(() => {
+    startTimer();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [startTimer]);
+
+  // Reset timer when standalone PWA returns to foreground
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && isStandalone()) {
+        startTimer();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [startTimer]);
 
   const progress = ((COUNTDOWN_SECONDS - secondsLeft) / COUNTDOWN_SECONDS) * 100;
   const circumference = 2 * Math.PI * 46;
@@ -143,7 +167,18 @@ const DoneActions = ({ app }: { app: SocialApp }) => (
     </Button>
     <Button
       className="w-full h-12 rounded-xl text-sm font-body font-semibold shadow-sm bg-primary text-primary-foreground hover:brightness-110"
-      onClick={() => window.close()}
+      onClick={() => {
+        // window.close() only works for JS-opened windows; standalone PWAs need a fallback
+        window.close();
+        // If still open, navigate away to effectively "close" the standalone app
+        setTimeout(() => {
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.replace("about:blank");
+          }
+        }, 100);
+      }}
     >
       🌿 I don't need this right now
     </Button>
