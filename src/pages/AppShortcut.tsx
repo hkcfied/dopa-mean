@@ -4,6 +4,7 @@ import { socialApps } from "@/data/apps";
 import { useAppIcon, usePlatform } from "@/hooks/usePlatform";
 import { Button } from "@/components/ui/button";
 import { DOMAIN } from "@/data/constants";
+import { trackInstallation } from "@/lib/supabase";
 
 const AppShortcut = () => {
   const { appId } = useParams<{ appId: string }>();
@@ -22,6 +23,7 @@ const AppShortcut = () => {
     navigator.clipboard.writeText(bookmarkUrl).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      trackInstallation();
     });
   };
 

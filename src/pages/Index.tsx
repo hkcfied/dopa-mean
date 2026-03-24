@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { socialApps, SocialApp } from "@/data/apps";
 import { useAppIcon } from "@/hooks/usePlatform";
 import { GITHUB_URL } from "@/data/constants";
+import { useInstallCount } from "@/hooks/useInstallCount";
 
 const Index = () => {
+  const installCount = useInstallCount();
   return (
     <div className="min-h-screen gradient-earth grain-overlay">
       <div className="flex flex-col items-center px-6 py-12 max-w-md mx-auto w-full min-h-screen">
@@ -109,8 +111,13 @@ const Index = () => {
               Star on GitHub
             </a>
           </div>
+          {installCount !== null && (
+            <p className="text-center text-[10px] text-muted-foreground/40 font-body tracking-wide mb-1">
+              {installCount.toLocaleString()} shortcuts created
+            </p>
+          )}
           <p className="text-center text-[10px] text-muted-foreground/50 font-body tracking-wide">
-            Open source · no tracking · works on your device
+            Open source · no personal tracking · works on your device
           </p>
         </div>
 
