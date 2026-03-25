@@ -5,6 +5,7 @@ import { useAppIcon, usePlatform } from "@/hooks/usePlatform";
 import { facts } from "@/data/facts";
 import { Button } from "@/components/ui/button";
 import { GITHUB_URL } from "@/data/constants";
+import SupportStrip from "@/components/SupportStrip";
 
 const COUNTDOWN_SECONDS = 30;
 const FACT_INTERVAL_SECONDS = 10;
@@ -185,6 +186,7 @@ const DoneActions = ({ app }: { app: SocialApp }) => (
     <p className="text-[11px] text-muted-foreground/50 pt-3 font-body">
       You paused. That takes strength. 💛
     </p>
+    <SupportStrip className="pt-4" />
   </div>
 );
 

@@ -4,6 +4,7 @@ import { useAppIcon } from "@/hooks/usePlatform";
 import { GITHUB_URL } from "@/data/constants";
 import { useInstallCount } from "@/hooks/useInstallCount";
 import { useState } from "react";
+import SupportStrip from "@/components/SupportStrip";
 
 const Index = () => {
   const installCount = useInstallCount();
@@ -165,7 +166,11 @@ const Index = () => {
             </div>
 
           </div>
-          <p className="text-center text-[9px] text-muted-foreground/30 font-body tracking-wide mt-6 mb-1">
+          <SupportStrip
+            className="opacity-0 animate-fade-up mt-6"
+            style={{ animationDelay: "0.44s" }}
+          />
+          <p className="text-center text-[9px] text-muted-foreground/30 font-body tracking-wide mt-3 mb-1">
             Open source · no personal tracking · works on your device
           </p>
         </div>
